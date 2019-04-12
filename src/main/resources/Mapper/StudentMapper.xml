@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.accp.Dao.StudentDao">
+    <select id="FinaAll" resultMap="Student">
+        select * from student
+    </select>
+    <select id="FinaById" resultMap="Student">
+        select * from student where id=#{id}
+    </select>
+    <update id="Update">
+        update student set name=#{name},sex=#{sex},date=#{date},gradeid=#{grade.id} where id=#{id}
+
+    </update>
+    <resultMap id="Student" type="com.accp.entity.Student">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="sex" column="sex"/>
+        <result property="date" column="date"/>
+        <association property="grade" select="com.accp.Dao.GradeDao.FindById" column="id">
+        </association>
+    </resultMap>
+</mapper>
